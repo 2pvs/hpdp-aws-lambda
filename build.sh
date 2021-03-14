@@ -12,6 +12,6 @@ do
     zip -r $LAMBDA.zip . 
     aws lambda update-function-code --function-name $LAMBDA --zip-file fileb://$LAMBDA.zip --region $AWS_REGION --profile $AWS_PROFILE
     rm $LAMBDA.zip
-    rm -rf ./*
+    rm -R `ls -1 -d */`
     cd ../../
 done
