@@ -8,7 +8,7 @@ resource "aws_lambda_function" "Worker" {
   runtime          = "python3.8"
   timeout          = aws_sqs_queue.Tasks.visibility_timeout_seconds
   memory_size      = 512
-  reserved_concurrent_executions = 100
+  #reserved_concurrent_executions = 100
 
   lifecycle {
     ignore_changes = [

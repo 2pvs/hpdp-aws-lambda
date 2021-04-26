@@ -1,5 +1,5 @@
-from utils import utils as ut
-from images import images as im
+from libs import utils as ut
+from libs import images as im
 
 def lambda_handler(event, context):
     evt = ut.SQSEvent(event)
@@ -12,4 +12,5 @@ def lambda_handler(event, context):
         if copy_status:
             queue.delete_message(evt.receipt_handles[i])
         else:
-            print('Messaga processing failed: ', m, evt.receipt_handles[i]) 
+            #if the message can not processed delete it from incoming queue and move it to DLQ
+            print('Messaga processing failed: ', m, evt.receipt_handles[i])

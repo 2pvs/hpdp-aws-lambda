@@ -16,27 +16,27 @@ cw_client = boto3.client('cloudwatch')
 sns_client = boto3.client('sns')
 
 class S3Event():
-    def __init__(self, event: dict) -> None:
+    def __init__(self, event):
         self.key = unquote_plus(event['Records'][0]['s3']['object']['key'])
         self.bucket = event['Records'][0]['s3']['bucket']['name']
         self.prefix = self.key.rsplit('/',1)[0] if '/' in self.key else '/'
 
 class SQSEvent():
-    def __init__(self, event: dict) -> None:
+    def __init__(self, event):
         self.messages = [x['body'] for x in event['Records']]
         self.receipt_handles = [x['receiptHandle'] for x in event['Records']]
 
 class CWAlarm():
-    def __init__(self, event: dict) -> None:
+    def __init__(self, event):
         self.alarm_name = event['detail']['alarmName']
         self.alarm_arn = event['resources'][0]
 
 class Folder():
-    def __init__(self, bucket: str, prefix: str) -> None:
+    def __init__(self, bucket, prefix):
         self.bucket = bucket
         self.prefix = prefix
 
-    def list_objects(self) -> None:
+    def list_objects(self):
         self.object_list = []
         paginator = s3_client.get_paginator('list_objects_v2')
         page_iterator = paginator.paginate(Bucket=self.bucket, Prefix=self.prefix)
@@ -50,7 +50,7 @@ class Queue():
         self.url = queue_url
         self.destination_prefix = destination_prefix
 
-    def _prepare_message(self, bucket: str, key: str) -> str:
+    def _prepare_message(self, bucket, key):
         destination_key = self.destination_prefix + key.rsplit('/',1)[1].rsplit('.',1)[0] + '.jpeg'
         message = {
             'source_bucket': bucket, 
@@ -60,7 +60,7 @@ class Queue():
             }
         return json.dumps(message, ensure_ascii=False)
     
-    def push_objects(self, bucket:str, key_list: list) -> None:
+    def push_objects(self, bucket, key_list):
         sqs_entries=[]
         for i, key in enumerate(key_list):
             msg = self._prepare_message(bucket, key)
@@ -79,8 +79,11 @@ class Queue():
     def check_empty(self):
         re = sqs_client.get_queue_attributes(QueueUrl=self.url, AttributeNames=['All'])
         messages_left = sum([int(re['Attributes'][a]) for a in
-                             ['ApproximateNumberOfMessages', 'ApproximateNumberOfMessagesDelayed',
-                              'ApproximateNumberOfMessagesNotVisible']])
+            [
+                'ApproximateNumberOfMessages', 
+                'ApproximateNumberOfMessagesDelayed',
+                'ApproximateNumberOfMessagesNotVisible'
+            ]])
         return messages_left == 0
 
 class QueueMessage():
