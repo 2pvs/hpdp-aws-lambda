@@ -15,9 +15,9 @@ Installation works on Linux. If you need to run installation from Windows, use T
 1.	Copy solution code to your computer
 2.	Download or build Terraform for Linux
 3.	Edit file *tf/variables.tf*
-    a.	variable "aws_default_region" { default = "you aws region code (like us-east-1)" }
-    b.	variable "aws_cli_profile"    { default = "put your aws profile name" }
-    c.	variable "s3_bucket"          { default = "put a global unique name for your s3 bucket here"}
+    a.	variable "aws_default_region" { default = "you aws region code (like us-east-1)" } 
+    b.	variable "aws_cli_profile"    { default = "put your aws profile name" } 
+    c.	variable "s3_bucket"          { default = "put a global unique name for your s3 bucket here"} 
 4.	Navigate to /tf folder
 5.	Run **terraform init**
 6.	Run **terraform apply**
@@ -25,9 +25,9 @@ Installation works on Linux. If you need to run installation from Windows, use T
 7.	Navigate to solution root folder and run **sh build.sh**
 
 ## Solution usage
-•	Prepare your data files and copy them to S3 bucket defined in tf/variables.tf  *variable "s3_bucket"* to a dedicated folder. In our sample case the data must be TIFF files.
-•	Create empty file job.start and copy it to the root of the data folder.
-•	Check results folder for processing results.
+•	Prepare your data files and copy them to S3 bucket defined in tf/variables.tf  *variable "s3_bucket"* to a dedicated folder. In our sample case the data must be TIFF files. 
+•	Create empty file job.start and copy it to the root of the data folder. 
+•	Check results folder for processing results. 
 
 ## Credits
 Created by Vladimir Popov, https://www.linkedin.com/in/vpopov
