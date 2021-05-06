@@ -6,7 +6,7 @@ resource "aws_lambda_function" "Worker" {
   handler          = "Worker.lambda_handler"
   source_code_hash = data.archive_file.dummy.output_base64sha256
   runtime          = "python3.8"
-  timeout          = aws_sqs_queue.Tasks.visibility_timeout_seconds
+  timeout          = 120
   memory_size      = 512
   #reserved_concurrent_executions = 100
 

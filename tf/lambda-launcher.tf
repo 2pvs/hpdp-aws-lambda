@@ -7,7 +7,7 @@ resource "aws_lambda_function" "Launcher" {
   source_code_hash = data.archive_file.dummy.output_base64sha256
   runtime          = "python3.8"
   timeout          = 900
-  memory_size      = 512
+  memory_size      = 1024
   
   # set terraform ingnore changes in lambda files
   lifecycle {
