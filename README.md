@@ -9,7 +9,7 @@ Installation works on Linux. If you need to run installation from Windows, use T
 ### Prerequisites
 *	Open AWS account and issue AWS access keys with admin privileges
 *	Install AWS CLI. 
-*	Find a free region in your aws account and configure cli profile with admin keys
+*	Find a free region in your aws account and configure AWS CLI profile with admin keys on your computer
 
 ### Deployment
 1.	Copy solution code to your computer
