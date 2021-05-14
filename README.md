@@ -1,7 +1,7 @@
 # High Performance Data Processing Tool
 
 ## Description
-This solution demo is dedicated to parallel data processing on AWS platform: Lambda, S3, SQS, CloudWatch. It loads objects from S3, processes them in parallel and returns results back to S3. Current demo converts TIFF files to JPEGs. In order to process other data or data formats create a custom Worker lambda function.
+This is a solution demo dedicated for high speed parallel data processing on AWS platform using Lambda, S3, SQS, CloudWatch. It loads objects from S3, processes them in parallel by up to 3000 lambda functions, and returns results back to S3. Current demo converts TIFF files to JPEGs. In order to process other data or data formats create a custom Worker lambda function.
 
 ## Installation
 Installation works on Linux. If you need to run installation from Windows, use Terraform for Windows and rewrite build.sh for PS1.
